@@ -6,5 +6,7 @@ services:
 
   client:
     build: ./client
-    depends_on:
-      - server
+    env_file: .env
+    cap_add: ['NET_ADMIN']
+    depends_on: ['server']
+

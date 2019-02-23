@@ -1,4 +1,8 @@
 #!/bin/sh
 
-iperf3 -c server -f K -R
+echo "Executing traffic shaping experiment: $EXPERIMENT"
+
+./tc/$EXPERIMENT.sh || exit 1
+
+iperf3 -c $SERVER -p $PORT -f K -R
 

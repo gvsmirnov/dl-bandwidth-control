@@ -1,7 +1,15 @@
 FROM alpine
 
-RUN apk add --no-cache iperf3
-ADD run.sh /
-RUN chmod +x run.sh
+RUN apk add --no-cache iperf3 iproute2
+WORKDIR /client
 
-ENTRYPOINT ["/run.sh"]
+ADD run.sh .
+ADD tc tc/
+RUN chmod -R +x .
+
+ENV SERVER=server
+ENV PORT=5201
+ENV EXPERIMENT=baseline
+
+ENTRYPOINT ["./run.sh"]
+
